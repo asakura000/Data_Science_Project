@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+	<style>
+		*{
+			margin: 0; padding: 0; border: 0;box-sizing:border-box;
+		}
+
+		button {
+			height: 50px;
+			width: 100px;
+		}
+
+		h1,
+		h2,
+		h3,
+		p {
+  			font-family: Helvetica;
+  			color: white;
+		}
+
+		h1 {
+  			font-size: 75px;
+  			font-weight: bold;
+  			color: #ebb931;
+  			text-align: center;
+  			padding-top: 30px;
+		}
+
+		h2{
+			color: black;
+			text-align: center;
+		}
+
+		h3 {
+			color: white;
+			font-size: 40px;
+		}
+
+		h4 {
+			padding-top: 20px;
+			font-size: 20px;
+			color: white;
+			font-family: Helvetica;
+		}
+
+		p{
+			font-size: 30px;
+			font-weight: bold;
+			color: white;
+			text-align: center;
+		}
+
+		main {
+			background-color: white; 
+			min-height: 1200px;
+			display: flex;
+			flex-flow: row wrap;
+		}
+
+
+		.left {
+			flex: 0 0 600px;
+			background-color: #05ABF8;
+		}
+
+		.middle {
+			flex: 1 0 auto;
+			background-color: skyblue;
+		}
+
+		.right{
+			flex: 0 0 600px;
+			background-color: #05ABF8; 
+		}
+
+		.type__box{
+			height: 150px;
+			width: 580px;
+			border-top-right-radius: 5%;
+			border-top-left-radius:5%;
+			border-bottom-right-radius: 5%;
+			border-bottom-left-radius: 5%;
+		}
+
+
+		.headerContainer{
+			width: 100%;
+			height: 75px;
+			background-color: white;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			justify-content: flex-start;
+			align-items: flex-start;
+			align-content: flex-start; 
+
+		}
+
+		#headerText {
+			padding-left: 200px;
+			padding-top: 10px;
+			color: #05ABF8;
+			font-size: 50px;
+		}
+
+		
+		.result_text {
+			font-family: 'Roboto', sans-serif;
+			font-size: 50px;
+			color: yellow;
+		}
+
+		.textbox {
+			height: 50px;
+		}
+
+		.legendText {
+			font-family: Helvetica;
+			font-size: 40px;
+			color: white;
+			font-weight: bold;
+			padding-top: 20 px;
+		}
+
+
+		.guage1 {
+			padding-top: 25px;
+			width: 100%;
+			max-width: 500px;
+			font-family: 'Roboto', sans-serif;
+			font-size: 64px;
+			color: red;
+			padding-bottom: 50px;
+		}
+
+		.guage2 {
+			width: 100%;
+			max-width: 500px;
+			font-family: 'Roboto', sans-serif;
+			font-size: 64px;
+			color: green;
+			padding-bottom: 25px;
+		}
+
+		.guage__body1 {
+			width: 100%;
+			height: 0;
+			padding-bottom: 50%;
+			background-color: gray;
+			position: relative;
+			border-top-left-radius: 100% 200%;
+			border-top-right-radius: 100% 200%;
+			overflow: hidden;
+
+		}
+
+		.guage__body2 {
+			width: 100%;
+			height: 0;
+			padding-bottom: 50%;
+			background-color: gray;
+			position: relative;
+			border-top-left-radius: 100% 200%;
+			border-top-right-radius: 100% 200%;
+			overflow: hidden;
+		}
+
+		.guage__fill1{
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: inherit;
+			height: 100%;
+			background-color: red;
+			transform-origin: center top;
+			transform: rotate(0.25turn);
+			transition: transform 0.2s ease-out;
+		}
+
+		.guage__fill2{
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: inherit;
+			height: 100%;
+			background-color: green;
+			transform-origin: center top;
+			transform: rotate(0.25turn);
+			transition: transform 0.2s ease-out;
+		}
+
+		.guage__cover1{
+			width: 75%;
+			height: 150%;
+			background-color: skyblue;
+			border-radius: 50%;
+			position: absolute;
+			top: 25%;
+			left: 50%;
+			transform: translateX(-50%);
+
+			/* Text */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding-bottom: 25%;
+			box-sizing: border-box;
+		}
+
+		.guage__cover2{
+			width: 75%;
+			height: 150%;
+			background-color: skyblue;
+			border-radius: 50%;
+			position: absolute;
+			top: 25%;
+			left: 50%;
+			transform: translateX(-50%);
+
+			/* Text */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding-bottom: 25%;
+			box-sizing: border-box;
+		}
+
+		#box{
+			display: flex;
+			background-color: white;
+			padding-top: 20px;
+			padding-left: 50px;
+			height: 100px;
+			width: 200px;
+		}
+
+		#textDisplay{
+			display: flex;
+			padding-left: 50px;
+			padding-top: 25%;
+			font-size: 20px;
+			font-weight: bold;
+			color: black;
+			text-align: left;
+
+		}
+
+		#photo{
+			width: 75px;
+			height: 75px;
+		}
+
+		#random_text{
+
+			color: black;
+		}
+
+
+	</style>
+
+  <head>
+		<meta charset="utf-8">
+		<title>DAbL</title>
+		<link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+  <body>
+
+  	<!--- Header --->
+	<section class="headerContainer">
+		<img id="photo" src="{{url_for('static', filename='bluebird.png')}}" alt="bird">
+		<h2 id="headerText">Detecting Abusive Language (DAbL)</h2>
+	</section>
+
+
+	<!---Main Content Section: 3 columns--->
+
+	<main>
+		<!--- Col #1: Text box for user input.--->
+		<section class="left">
+			<div id=user_inputs_text>
+			<form action="{{ url_for('main') }}" method="POST">
+	    		<fieldset>
+	        		<legend class="legendText">Type your text here:</legend>
+	        		<input class="type__box" name="user_input_text" type="text" required>
+	        		<button type="submit" class="btn btn-primary">Plain Old Button</button>
+	    		</fieldset>
+			</form>
+			</div>
+			<div id="textDisplay">
+				<h4> {{ input_text }} </h4>
+			</div>
+		</section>
+
+		<!--- Col #2: Output Display --->
+    	<section class="middle">
+			<div class="alert alert-success">
+				{% if input_text %}
+					<h3> Model Predicted:  </h3>
+	   	 		{% endif %}
+	   	 	
+				{% if result %}
+					<h4 class="result_text">  {{ result }}  </h4>
+	    		{% endif %}
+	    	
+	    		{% if percent_abusive %}
+	    			<h4> Probability abusive: {{ percent_abusive }} </h4>
+	    		{% endif %}
+
+	    		{% if percent_notAbusive %}
+	    			<h4> Probability not abusive: {{ percent_notAbusive }} </h4>
+	    		{% endif %}
+	 
+			</div>
+
+			<div class="guage1">
+				<p>Percent Abusive</p>
+				<div class="guage__body1">
+					<div class="guage__fill1"></div>
+					<div class="guage__cover1">50%</div>
+				</div>
+
+			</div>
+
+			<div class="guage2">
+				<p>Percent Not Abusive</p>
+				<div class="guage__body2">
+					<div class="guage__fill2"></div>
+					<div class="guage__cover2">80%</div>
+				</div>
+
+			</div>
+
+		</section>
+
+		<!---Col #3: Random Text Generation --->
+	
+		<section class="right">
+			<h3>Click to Generate a Randomly Selected Sample Text<h3/>
+
+    		<form method ="POST" action="{{ url_for('main') }}">
+  				<button type="submit" name="random" value="random"> Random </button>
+  				<h4> Random Text Here: </h4>
+  				{% if random_text %}<h4 id="random_text">{{ random_text }}</h4>
+  				{% endif %}
+			</form> 
+
+
+	
+    		<h3>Choose from a Drop Down Menu<h3/>
+    		<select name="colour" method="GET" action="/">
+    			{% for colour in colours %}
+        		<option value="{{colour}}" SELECTED>{{colour}}</option>"
+    			{% endfor %}
+			</select>
+			<h4> Selected text gets displayed here</h4>
+			<button type="submit" name="select" value="select"> Select </button>
+			<button type="submit" name="refresh" value="refresh"> Refresh </button>
+
+		</section>
+
+	</main>
+
+	<footer><h4>Footer</h4></footer>
+     
+     <script>
+     	const guageElement1 = document.querySelector(".guage1");
+     	function setGuageValue1(guage, value) {
+     		if (value < 0 || value > 1){
+     			return;
+     		}
+
+     		guage.querySelector(".guage__fill1").style.transform = `rotate(${value / 2}turn)`;
+     		guage.querySelector(".guage__cover1").textContent = `${Math.round(value * 100)}%`;
+     	}
+
+     	const guageElement2 = document.querySelector(".guage2");
+     	function setGuageValue2(guage, value) {
+     		if (value < 0 || value > 1){
+     			return;
+     		}
+
+     		guage.querySelector(".guage__fill2").style.transform = `rotate(${value / 2}turn)`;
+     		guage.querySelector(".guage__cover2").textContent = `${Math.round(value * 100)}%`;
+     	}
+
+     	setGuageValue1(guageElement1, {{ percent_abusive }} );
+
+     	setGuageValue2(guageElement2, {{ percent_notAbusive}} );
+
+     </script>
+
+
+
+
+  </body>
+</html>
