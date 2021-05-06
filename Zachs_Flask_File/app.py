@@ -96,18 +96,6 @@ def main():
                 percent_notAbusive=percent_notAbusive)
 
         # Option 3: dropdown menu?
-        
-                
-
-
-@app.route('/randomlyChoose/', methods=['GET', "POST"])
-def randomlyChoose():
-    return flask.render_template('randomlyChoose.html')
-
-@app.route('/dropdown/', methods=['GET', 'POST'])
-def dropdown():
-    return flask.render_template('dropdown.html')
-        
 
 @app.route('/input_values/', methods=['GET', 'POST'])
 def input_values():
