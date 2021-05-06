@@ -97,6 +97,7 @@ def main():
 
         # Option 3: dropdown menu?
 
+
 @app.route('/input_values/', methods=['GET', 'POST'])
 def input_values():
     if flask.request.method == 'GET':
