@@ -14,4 +14,4 @@ samples = df.text.tolist()
 sampleOne = c(samples)
 
 # choose 10 at random - for dropdown menu
-sampleTen = random.sample(samples, 10)
+sampleThree = random.sample(samples, 3)

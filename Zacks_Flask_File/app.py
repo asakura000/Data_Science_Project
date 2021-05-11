@@ -92,14 +92,15 @@ def main():
         # Option 3: Generate dropdown menu
         elif flask.request.form.get('generate'):
             
-            dropdownMenu = random.sample(list_of_sample_texts, 3)
-            return flask.render_template('index.html', 
+           dropdownMenu = random.sample(list_of_sample_texts, 3)
+           return flask.render_template('index.html', 
                 dropdownMenu=dropdownMenu)
 
         # evaluate the selected text from the dropdown menu
         elif flask.request.form.get('evaluate'):
-            
+             
             # gets the current value from the dropdown menu
+                
             selected = flask.request.form.get('dropdownMenu')
 
             # converts the current value from dropdown menu into a string

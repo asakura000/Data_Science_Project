@@ -357,20 +357,13 @@
 
 			<form method="POST" action="{{ url_for('main') }}">
 				<button type="submit" name="generate" value="generate"> Generate New List of Sample Texts </button>
-			
-
-				<!---<form method="POST" action="{{ url_for('main') }}">--->
-				
+		
 				<select name="dropdownMenu" >
-				<!--
-					method="GET" action="{{ url_for('main') }}"--->
 				  {% for d in dropdownMenu %}
 				  	<option value= "{{ d }}" SELECT>{{ d }}</option>
 	    		  {% endfor %}
 				</select>
 				
-
-			<!---<form method="POST" action="{{ url_for('main') }}">--->
 				<button type="submit" name="evaluate" value="evaluate"> Evaluate </button>
 				
 				<h4 id="selected_text">{{ selected_text }}</h4>
