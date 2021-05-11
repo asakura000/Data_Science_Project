@@ -23,11 +23,12 @@ with open(path_to_vectorizer, 'rb') as f:
 
 with open(path_to_text_classifier, 'rb') as f:
     model = pickle.load(f)
+ 
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
 
-    dropdownMenu = random.sample(list_of_sample_texts, 3)
+    
 
     if flask.request.method == 'GET':
         # Just render the initial form, to get input
@@ -92,6 +93,7 @@ def main():
         # Option 3: Generate dropdown menu
         elif flask.request.form.get('generate'):
             
+           global dropdownMenu 
            dropdownMenu = random.sample(list_of_sample_texts, 3)
            return flask.render_template('index.html', 
                 dropdownMenu=dropdownMenu)
@@ -122,16 +124,17 @@ def main():
                 selected_text=selected_text,
                 dropdownMenu=dropdownMenu)
 
-                
+# won't need this              
 @app.route('/randomlyChoose/', methods=['GET', "POST"])
 def randomlyChoose():
     return flask.render_template('randomlyChoose.html')
 
+# won't need this   
 @app.route('/dropdown/', methods=['GET', 'POST'])
 def dropdown():
     return flask.render_template('dropdown.html')
         
-
+# won't need this   
 @app.route('/input_values/', methods=['GET', 'POST'])
 def input_values():
     if flask.request.method == 'GET':
@@ -154,17 +157,17 @@ def input_values():
 
     return(flask.render_template('input_values.html'))
 
-
+# won't need this   
 @app.route('/images/')
 def images():
     return flask.render_template('images.html')
 
-
+# won't need this   
 @app.route('/bootstrap/')
 def bootstrap():
     return flask.render_template('bootstrap.html')
 
-
+# won't need this   
 @app.route('/classify_image/', methods=['GET', 'POST'])
 def classify_image():
     if flask.request.method == 'GET':
