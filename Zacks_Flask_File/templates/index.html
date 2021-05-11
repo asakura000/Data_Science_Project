@@ -57,6 +57,14 @@
 			flex-flow: row wrap;
 		}
 
+		select {
+  			width: 500px;
+  			overflow: hidden;
+  			white-space: pre;
+  			text-overflow: ellipsis;
+		}
+
+
 
 		.left {
 			flex: 0 0 600px;
@@ -96,14 +104,7 @@
 
 		}
 
-		#headerText {
-			padding-left: 200px;
-			padding-top: 10px;
-			color: #05ABF8;
-			font-size: 50px;
-		}
-
-		
+	
 		.result_text {
 			font-family: 'Roboto', sans-serif;
 			font-size: 50px;
@@ -234,6 +235,13 @@
 			width: 200px;
 		}
 
+		#headerText {
+			padding-left: 200px;
+			padding-top: 10px;
+			color: #05ABF8;
+			font-size: 50px;
+		}
+
 		#textDisplay{
 			display: flex;
 			padding-left: 50px;
@@ -294,10 +302,9 @@
 		<!--- Col #2: Output Display --->
     	<section class="middle">
 			<div class="alert alert-success">
-				{% if input_text %}
-					<h3> Model Predicted:  </h3>
-	   	 		{% endif %}
-	   	 	
+				
+				<h3> Model Predicted:  </h3>
+	   	 			   	 	
 				{% if result %}
 					<h4 class="result_text">  {{ result }}  </h4>
 	    		{% endif %}
@@ -344,18 +351,31 @@
   				{% endif %}
 			</form> 
 
+		<!--- Generate and Evaluate Dropdown Menu --->
 
-	
-    		<h3>Choose from a Drop Down Menu<h3/>
-    		<select name="colour" method="GET" action="/">
-    			{% for colour in colours %}
-        		<option value="{{colour}}" SELECTED>{{colour}}</option>"
-    			{% endfor %}
-			</select>
-			<h4> Selected text gets displayed here</h4>
-			<button type="submit" name="select" value="select"> Select </button>
-			<button type="submit" name="refresh" value="refresh"> Refresh </button>
+			<label for="dropdownMenu">Choose a Sample Text:</label>
 
+			<form method="POST" action="{{ url_for('main') }}">
+				<button type="submit" name="generate" value="generate"> Generate New List of Sample Texts </button>
+			
+
+				<!---<form method="POST" action="{{ url_for('main') }}">--->
+				
+				<select name="dropdownMenu" >
+				<!--
+					method="GET" action="{{ url_for('main') }}"--->
+				  {% for d in dropdownMenu %}
+				  	<option value= "{{ d }}" SELECT>{{ d }}</option>
+	    		  {% endfor %}
+				</select>
+				
+
+			<!---<form method="POST" action="{{ url_for('main') }}">--->
+				<button type="submit" name="evaluate" value="evaluate"> Evaluate </button>
+				
+				<h4 id="selected_text">{{ selected_text }}</h4>
+			</form>
+			
 		</section>
 
 	</main>
