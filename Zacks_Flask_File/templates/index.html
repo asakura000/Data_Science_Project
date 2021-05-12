@@ -353,10 +353,16 @@
 
 		<!--- Generate and Evaluate Dropdown Menu --->
 
-			<label for="dropdownMenu">Choose a Sample Text:</label>
+			<label for="dropdownMenu">Choose From a Category:</label>
 
 			<form method="POST" action="{{ url_for('main') }}">
-				<button type="submit" name="generate" value="generate"> Generate New List of Sample Texts </button>
+				<button type="submit" name="mixed" value="mixed"> Mixed Bag </button>
+				<button type="submit" name="misc" value="misc"> Miscellaneous </button>
+				<button type="submit" name="race" value="race"> Race </button>
+				<button type="submit" name="gender" value="gender"> Gender </button>
+				<button type="submit" name="immigration" value="immigration"> Immigration </button>
+				<button type="submit" name="other" value="other"> Other Groups </button>
+				<button type="submit" name="politics" value="politics"> Politcs </button>
 		
 				<select name="dropdownMenu" >
 				  {% for d in dropdownMenu %}

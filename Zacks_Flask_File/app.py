@@ -28,7 +28,12 @@ with open(path_to_text_classifier, 'rb') as f:
 @app.route('/', methods=['GET', 'POST'])
 def main():
 
-    
+    miscellaneous = getSampleText.miscellaneous_list
+    race = getSampleText.race_list
+    gender = getSampleText.gender_list
+    other_groups = getSampleText.other_groups_list
+    politics = getSampleText.politics_list
+    immigration = getSampleText.immigration_list
 
     if flask.request.method == 'GET':
         # Just render the initial form, to get input
@@ -91,11 +96,48 @@ def main():
                 percent_notAbusive=percent_notAbusive)
 
         # Option 3: Generate dropdown menu
-        elif flask.request.form.get('generate'):
-            
+        elif flask.request.form.get('mixed'):
+           
            global dropdownMenu 
-           dropdownMenu = random.sample(list_of_sample_texts, 3)
+
+           dropdownMenu = random.sample(list_of_sample_texts, 10)
            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('misc'):
+
+            dropdownMenu = miscellaneous
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('race'):
+
+            dropdownMenu = race
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('gender'):
+
+            dropdownMenu = gender
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('immigration'):
+
+            dropdownMenu = immigration
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('other'):
+
+            dropdownMenu = other_groups
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('politics'):
+
+            dropdownMenu = politics
+            return flask.render_template('index.html', 
                 dropdownMenu=dropdownMenu)
 
         # evaluate the selected text from the dropdown menu
