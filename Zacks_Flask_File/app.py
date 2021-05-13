@@ -5,39 +5,39 @@ import pandas as pd
 import getSampleText
 from random import choice as c
 import random
-
 from skimage import io
 from skimage import transform
 
-
+test_string = 'test_string_here'
 app = flask.Flask(__name__, template_folder='templates')
 
 path_to_vectorizer = 'models/vectorizer_me.pkl'
 path_to_text_classifier = 'models/text-classifier_me.pkl'
 #path_to_image_classifier = 'models/image-classifier.pkl'
 
-# one of randomly chosen texts from 100_SAMPLES.xlsx - list is a single string
+# get the list of 100 text strings from another .py file
 list_of_sample_texts = getSampleText.samples
-
-# dropdown menu - this is a list of strings
-dropdownMenu = getSampleText.sampleTen
 
 with open(path_to_vectorizer, 'rb') as f:
     vectorizer = pickle.load(f)
 
 with open(path_to_text_classifier, 'rb') as f:
     model = pickle.load(f)
-
-#with open(path_to_image_classifier, 'rb') as f:
-#   image_classifier = pickle.load(f)
-
+ 
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
+
+    miscellaneous = getSampleText.miscellaneous_list
+    race = getSampleText.race_list
+    gender = getSampleText.gender_list
+    other_groups = getSampleText.other_groups_list
+    politics = getSampleText.politics_list
+    immigration = getSampleText.immigration_list
+
     if flask.request.method == 'GET':
         # Just render the initial form, to get input
         return(flask.render_template('index.html'))
-
 
     if flask.request.method == 'POST':
 
@@ -95,20 +95,88 @@ def main():
                 percent_abusive=percent_abusive,
                 percent_notAbusive=percent_notAbusive)
 
-        # Option 3: dropdown menu?
-        
+        # Option 3: Generate dropdown menu
+        elif flask.request.form.get('mixed'):
+           
+           global dropdownMenu 
+
+           dropdownMenu = random.sample(list_of_sample_texts, 10)
+           return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('misc'):
+
+            dropdownMenu = miscellaneous
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('race'):
+
+            dropdownMenu = race
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('gender'):
+
+            dropdownMenu = gender
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('immigration'):
+
+            dropdownMenu = immigration
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('other'):
+
+            dropdownMenu = other_groups
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        elif flask.request.form.get('politics'):
+
+            dropdownMenu = politics
+            return flask.render_template('index.html', 
+                dropdownMenu=dropdownMenu)
+
+        # evaluate the selected text from the dropdown menu
+        elif flask.request.form.get('evaluate'):
+             
+            # gets the current value from the dropdown menu
                 
+            selected = flask.request.form.get('dropdownMenu')
 
+            # converts the current value from dropdown menu into a string
+            selected_text = str(selected)
 
+            # predict classification 
+            X = vectorizer.transform([selected_text])
+            predictions = model.predict(X)
+            prediction = predictions[0]
+            predicted_probas = model.predict_proba(X)
+            predicted_proba = predicted_probas[0]
+            percent_abusive = predicted_proba[0]
+            percent_notAbusive = predicted_proba[1]
+
+            return flask.render_template('index.html',
+                result=prediction,
+                percent_abusive=percent_abusive,
+                percent_notAbusive=percent_notAbusive,
+                selected_text=selected_text,
+                dropdownMenu=dropdownMenu)
+
+# won't need this              
 @app.route('/randomlyChoose/', methods=['GET', "POST"])
 def randomlyChoose():
     return flask.render_template('randomlyChoose.html')
 
+# won't need this   
 @app.route('/dropdown/', methods=['GET', 'POST'])
 def dropdown():
     return flask.render_template('dropdown.html')
         
-
+# won't need this   
 @app.route('/input_values/', methods=['GET', 'POST'])
 def input_values():
     if flask.request.method == 'GET':
@@ -131,17 +199,17 @@ def input_values():
 
     return(flask.render_template('input_values.html'))
 
-
+# won't need this   
 @app.route('/images/')
 def images():
     return flask.render_template('images.html')
 
-
+# won't need this   
 @app.route('/bootstrap/')
 def bootstrap():
     return flask.render_template('bootstrap.html')
 
-
+# won't need this   
 @app.route('/classify_image/', methods=['GET', 'POST'])
 def classify_image():
     if flask.request.method == 'GET':

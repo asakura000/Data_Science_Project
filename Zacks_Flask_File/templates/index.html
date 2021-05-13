@@ -57,6 +57,14 @@
 			flex-flow: row wrap;
 		}
 
+		select {
+  			width: 500px;
+  			overflow: hidden;
+  			white-space: pre;
+  			text-overflow: ellipsis;
+		}
+
+
 
 		.left {
 			flex: 0 0 600px;
@@ -96,14 +104,7 @@
 
 		}
 
-		#headerText {
-			padding-left: 200px;
-			padding-top: 10px;
-			color: #05ABF8;
-			font-size: 50px;
-		}
-
-		
+	
 		.result_text {
 			font-family: 'Roboto', sans-serif;
 			font-size: 50px;
@@ -234,6 +235,13 @@
 			width: 200px;
 		}
 
+		#headerText {
+			padding-left: 200px;
+			padding-top: 10px;
+			color: #05ABF8;
+			font-size: 50px;
+		}
+
 		#textDisplay{
 			display: flex;
 			padding-left: 50px;
@@ -294,10 +302,9 @@
 		<!--- Col #2: Output Display --->
     	<section class="middle">
 			<div class="alert alert-success">
-				{% if input_text %}
-					<h3> Model Predicted:  </h3>
-	   	 		{% endif %}
-	   	 	
+				
+				<h3> Model Predicted:  </h3>
+	   	 			   	 	
 				{% if result %}
 					<h4 class="result_text">  {{ result }}  </h4>
 	    		{% endif %}
@@ -344,18 +351,30 @@
   				{% endif %}
 			</form> 
 
+		<!--- Generate and Evaluate Dropdown Menu --->
 
-	
-    		<h3>Choose from a Drop Down Menu<h3/>
-    		<select name="colour" method="GET" action="/">
-    			{% for colour in colours %}
-        		<option value="{{colour}}" SELECTED>{{colour}}</option>"
-    			{% endfor %}
-			</select>
-			<h4> Selected text gets displayed here</h4>
-			<button type="submit" name="select" value="select"> Select </button>
-			<button type="submit" name="refresh" value="refresh"> Refresh </button>
+			<label for="dropdownMenu">Choose From a Category to Generate Sample Texts:</label>
 
+			<form method="POST" action="{{ url_for('main') }}">
+				<button type="submit" name="mixed" value="mixed"> Mixed Bag </button>
+				<button type="submit" name="misc" value="misc"> Miscellaneous </button>
+				<button type="submit" name="race" value="race"> Race </button>
+				<button type="submit" name="gender" value="gender"> Gender </button>
+				<button type="submit" name="immigration" value="immigration"> Immigration </button>
+				<button type="submit" name="other" value="other"> Other Groups </button>
+				<button type="submit" name="politics" value="politics"> Politcs </button>
+		
+				<select name="dropdownMenu" >
+				  {% for d in dropdownMenu %}
+				  	<option value= "{{ d }}" SELECT>{{ d }}</option>
+	    		  {% endfor %}
+				</select>
+				
+				<button type="submit" name="evaluate" value="evaluate"> Evaluate </button>
+				
+				<h4 id="selected_text">{{ selected_text }}</h4>
+			</form>
+			
 		</section>
 
 	</main>
