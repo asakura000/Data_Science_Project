@@ -6,9 +6,19 @@
 		}
 
 		button {
+			width: 200px;
 			height: 50px;
-			width: 100px;
+			background-color: white;
+			border-radius: 20px;
+			border: 1px solid black;
 			font-size: 15px;
+			margin-top: 20px;
+			margin-left: 20px;
+			margin-right: 20px;
+		}
+
+		button:hover {
+			background-color: yellow;
 		}
 
 		h1,
@@ -35,6 +45,7 @@
 		h3 {
 			color: white;
 			font-size: 40px;
+			text-align: center;
 		}
 
 		h4 {
@@ -52,7 +63,7 @@
 		}
 
 		main {
-			background-color: white; 
+			background-color: white;
 			min-height: 1200px;
 			display: flex;
 			flex-flow: row wrap;
@@ -60,33 +71,55 @@
 
 		select {
   			width: 500px;
+  			height: 25px;
   			overflow: hidden;
   			white-space: pre;
   			text-overflow: ellipsis;
+  			margin-top: 40px;
+  			margin-bottom: 20px;
+  			font-size: 20px;
 		}
 
-
+		.evalLeft{
+			margin-top: 5%;
+		}
 
 		.left {
 			flex: 0 0 600px;
 			background-color: #05ABF8;
+      		display: flex;
+      		flex-flow: column wrap;
 		}
 
 		.middle {
 			flex: 1 0 auto;
 			background-color: skyblue;
+		    display: flex;
+		    flex-flow: column wrap;
+		    align-items: center;
 		}
 
-		.right{
+		.right {
 			flex: 0 0 600px;
-			background-color: #05ABF8; 
+			background-color: #05ABF8;
+      		display: flex;
+      		flex-flow: column wrap;
+      		align-items: center;
 		}
 
-		.type__box{
+		.typeBox{
 			height: 150px;
 			width: 580px;
+			font-size: 25px;
+			border-radius: 20px;
+			border: 2px solid blue;
 		}
 
+    	.userInputFieldset {
+      		display: flex;
+      		flex-direction: column;
+      		align-items: center;
+    	}
 
 		.headerContainer{
 			width: 100%;
@@ -97,20 +130,22 @@
 			flex-direction: row;
 			justify-content: flex-start;
 			align-items: flex-start;
-			align-content: flex-start; 
+			align-content: flex-start;
 
 		}
 
-	
+
 		.result_text {
 			font-family: 'Roboto', sans-serif;
 			font-size: 50px;
 			color: yellow;
+			text-align: center;
 		}
 
 		.textbox {
 			height: 50px;
 			padding-left: 100px;
+
 		}
 
 		.legendText {
@@ -118,9 +153,11 @@
 			font-size: 40px;
 			color: white;
 			font-weight: bold;
-			padding-top: 20 px;
+			padding-top: 20px;
+			margin-bottom: 20px;
+      		text-align: center;
+      		width: 100%;
 		}
-
 
 		.guage1 {
 			padding-top: 25px;
@@ -224,6 +261,14 @@
 			box-sizing: border-box;
 		}
 
+		.guageLabel {
+			margin-bottom: 20px;
+		}
+
+		.dropdowngroup{
+			height: 600px;
+		}
+
 		#box{
 			display: flex;
 			background-color: white;
@@ -241,14 +286,10 @@
 		}
 
 		#textDisplay{
-			display: flex;
-			padding-left: 50px;
 			padding-top: 25%;
-			font-size: 20px;
 			font-weight: bold;
 			color: black;
-			text-align: left;
-
+      		text-align: center;
 		}
 
 		#photo{
@@ -259,6 +300,11 @@
 		#random_text{
 
 			color: black;
+			margin-bottom: 50px;
+		}
+
+		#randomButton {
+			margin-bottom: 30px;
 		}
 
 
@@ -283,30 +329,28 @@
 	<main>
 		<!--- Col #1: Text box for user input.--->
 		<section class="left">
-			<div id=user_inputs_text>
-			<form action="{{ url_for('main') }}" method="POST">
-	    		<fieldset>
-	        		<legend class="legendText">Type your text here:</legend>
-	        		<input class="type__box" name="user_input_text" type="text" required>
-	        		<button type="submit" class="btn btn-primary">Evaluate</button>
-	    		</fieldset>
-			</form>
+			<div>
+        <form action="{{ url_for('main') }}" method="POST">
+            <fieldset class="userInputFieldset">
+                <legend class="legendText">Type your text here:</legend>
+                <input class="typeBox" name="user_input_text" type="text" required>
+                <button type="submit" class="evalLeft">Evaluate</button>
+            </fieldset>
+        </form>
 			</div>
 			<div id="textDisplay">
-				<h4> {{ input_text }} </h4>
+				<h2> {{ input_text }} </h2>
 			</div>
 		</section>
 
 		<!--- Col #2: Output Display --->
     	<section class="middle">
-			<div class="alert alert-success">
-				
+			<div>
 				<h3> Model Predicted:  </h3>
-	   	 			   	 	
 				{% if result %}
 					<h4 class="result_text">  {{ result }}  </h4>
 	    		{% endif %}
-	    	
+
 	    		{% if percent_abusive %}
 	    			<h4> Probability abusive: {{ percent_abusive }} </h4>
 	    		{% endif %}
@@ -314,71 +358,69 @@
 	    		{% if percent_notAbusive %}
 	    			<h4> Probability not abusive: {{ percent_notAbusive }} </h4>
 	    		{% endif %}
-	 
 			</div>
 
 			<div class="guage1">
-				<p>Percent Abusive</p>
+				<p class="guageLabel">Percent Abusive</p>
 				<div class="guage__body1">
 					<div class="guage__fill1"></div>
 					<div class="guage__cover1">50%</div>
 				</div>
-
 			</div>
 
 			<div class="guage2">
-				<p>Percent Not Abusive</p>
+				<p class="guageLabel">Percent Not Abusive</p>
 				<div class="guage__body2">
 					<div class="guage__fill2"></div>
 					<div class="guage__cover2">80%</div>
 				</div>
-
 			</div>
 
 		</section>
 
 		<!---Col #3: Random Text Generation --->
-	
+
 		<section class="right">
+			
 			<h3>Click to Generate a Randomly Selected Sample Text<h3/>
 
     		<form method ="POST" action="{{ url_for('main') }}">
-  				<button type="submit" name="random" value="random"> Random </button>
-  				<h4> Random Text Here: </h4>
+  				<button type="submit" id="randomButton" name="random" value="random"> Random </button>
   				{% if random_text %}<h4 id="random_text">{{ random_text }}</h4>
   				{% endif %}
-			</form> 
+			</form>
+		
 
 		<!--- Generate and Evaluate Dropdown Menu --->
+			<div id="dropdowngroup">
+				<label for="dropdownMenu">Choose From a Category to Generate Sample Texts:</label>
 
-			<label for="dropdownMenu">Choose From a Category to Generate Sample Texts:</label>
+				<form method="POST" action="{{ url_for('main') }}">
+					<button type="submit" name="mixed" value="mixed"> Mixed Bag </button>
+					<button type="submit" name="misc" value="misc"> Miscellaneous </button>
+					<button type="submit" name="race" value="race"> Race </button>
+					<button type="submit" name="gender" value="gender"> Gender </button>
+					<button type="submit" name="immigration" value="immigration"> Immigration </button>
+					<button type="submit" name="other" value="other"> Other Groups </button>
+					<button type="submit" name="politics" value="politics"> Politcs </button>
 
-			<form method="POST" action="{{ url_for('main') }}">
-				<button type="submit" name="mixed" value="mixed"> Mixed Bag </button>
-				<button type="submit" name="misc" value="misc"> Miscellaneous </button>
-				<button type="submit" name="race" value="race"> Race </button>
-				<button type="submit" name="gender" value="gender"> Gender </button>
-				<button type="submit" name="immigration" value="immigration"> Immigration </button>
-				<button type="submit" name="other" value="other"> Other Groups </button>
-				<button type="submit" name="politics" value="politics"> Politcs </button>
-		
-				<select name="dropdownMenu" >
-				  {% for d in dropdownMenu %}
-				  	<option value= "{{ d }}" SELECT>{{ d }}</option>
-	    		  {% endfor %}
-				</select>
-				
-				<button type="submit" name="evaluate" value="evaluate"> Evaluate </button>
-				
-				<h4 id="selected_text">{{ selected_text }}</h4>
-			</form>
-			
+					<select name="dropdownMenu" >
+					  {% for d in dropdownMenu %}
+					  	<option value= "{{ d }}" SELECT>{{ d }}</option>
+		    		  {% endfor %}
+					</select>
+
+					<button type="submit" name="evaluate" value="evaluate"> Evaluate </button>
+
+					<h4 id="selected_text">{{ selected_text }}</h4>
+				</form>
+			</div>
 		</section>
 
 	</main>
 
 	<footer><h4>Footer</h4></footer>
-     
+
      <script>
      	const guageElement1 = document.querySelector(".guage1");
      	function setGuageValue1(guage, value) {
