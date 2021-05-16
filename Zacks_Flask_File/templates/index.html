@@ -26,7 +26,7 @@
 		h3,
 		p {
   			font-family: Helvetica;
-  			color: white;
+  			color: black;
 		}
 
 		h1 {
@@ -43,8 +43,8 @@
 		}
 
 		h3 {
-			color: white;
-			font-size: 40px;
+			color: black;
+			font-size: 30px;
 			text-align: center;
 		}
 
@@ -89,6 +89,11 @@
 			background-color: gray;
       		display: flex;
       		flex-flow: column wrap;
+		}
+
+		.inputTextDisplay {
+			color: black;
+			font-size: 25px;
 		}
 
 		.middle {
@@ -301,10 +306,16 @@
 
 			color: black;
 			margin-bottom: 50px;
+			font-size: 25px;
 		}
 
 		#randomButton {
 			margin-bottom: 30px;
+		}
+
+		#selected_text {
+			font-size: 25px;
+			color: black;
 		}
 
 
@@ -339,7 +350,7 @@
         </form>
 			</div>
 			<div id="textDisplay">
-				<h2> {{ input_text }} </h2>
+				<h3 class="inputTextDisplay"> {{ input_text }} </h3>
 			</div>
 		</section>
 
@@ -405,6 +416,7 @@
 					<button type="submit" name="politics" value="politics"> Politcs </button>
 
 					<select name="dropdownMenu" >
+						<option></option>
 					  {% for d in dropdownMenu %}
 					  	<option value= "{{ d }}" SELECT>{{ d }}</option>
 		    		  {% endfor %}
