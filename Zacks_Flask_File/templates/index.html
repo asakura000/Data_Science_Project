@@ -10,7 +10,7 @@
 			height: 50px;
 			background-color: white;
 			border-radius: 20px;
-			border: 1px solid black;
+			border: 2px solid black;
 			font-size: 15px;
 			margin-top: 20px;
 			margin-left: 20px;
@@ -18,7 +18,7 @@
 		}
 
 		button:hover {
-			background-color: purple;
+			background-color: gray;
 		}
 
 		h1,
@@ -86,7 +86,7 @@
 
 		.left {
 			flex: 0 0 600px;
-			background-color: gray;
+			background-color: #05ABF8;
       		display: flex;
       		flex-flow: column wrap;
 		}
@@ -117,7 +117,7 @@
 			width: 580px;
 			font-size: 25px;
 			border-radius: 20px;
-			border: 2px solid blue;
+			border: 2px solid black;
 		}
 
     	.userInputFieldset {
@@ -344,7 +344,7 @@
         <form action="{{ url_for('main') }}" method="POST">
             <fieldset class="userInputFieldset">
                 <legend class="legendText">Type your text here:</legend>
-                <input class="typeBox" name="user_input_text" type="text" required>
+                <input class="typeBox" name="user_input_text" type="text" autocomplete=“off” required>
                 <button type="submit" class="evalLeft">Evaluate</button>
             </fieldset>
         </form>
