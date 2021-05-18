@@ -86,17 +86,30 @@
 
 		.left {
 			flex: 0 0 600px;
-			background-color: gray;
+			background-color: #05ABF8;
+      		display: flex;
+      		flex-flow: column wrap;
+		}
+
+		.inputTextDisplay {
+			color: black;
+			font-size: 25px;
 		}
 
 		.middle {
 			flex: 1 0 auto;
-			background-color: black;
+			background-color: skyblue;
+		    display: flex;
+		    flex-flow: column wrap;
+		    align-items: center;
 		}
 
 		.right {
 			flex: 0 0 600px;
-			background-color: gray; 
+			background-color: #05ABF8;
+      		display: flex;
+      		flex-flow: column wrap;
+      		align-items: center;
 		}
 
 		.typeBox{
@@ -317,7 +330,7 @@
 
   	<!--- Header --->
 	<section class="headerContainer">
-		<img id="photo" src="{{url_for('static', filename='blackbird.png')}}" alt="bird">
+		<img id="photo" src="{{url_for('static', filename='bluebird.png')}}" alt="bird">
 		<h2 id="headerText">Detecting Abusive Language (DAbL)</h2>
 	</section>
 
@@ -374,7 +387,7 @@
 				</div>
 			</div>
 
-		</section> 
+		</section>
 
 		<!---Col #3: Random Text Generation --->
 
@@ -447,7 +460,7 @@
 
      </script>
 
-<!---Just testing out whether or not this change will actually implement because there have been so many issues -->
+
 
 
   </body>

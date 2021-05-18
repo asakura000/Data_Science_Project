@@ -5,8 +5,7 @@ import pandas as pd
 import getSampleText
 from random import choice as c
 import random
-from skimage import io
-from skimage import transform
+
 
 test_string = 'test_string_here'
 app = flask.Flask(__name__, template_folder='templates')
