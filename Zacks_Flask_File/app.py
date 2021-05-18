@@ -72,8 +72,8 @@ def main():
             return flask.render_template('index.html', 
                 input_text=user_input_text,
                 result=prediction,
-                percent_abusive=percent_abusive,
-                percent_notAbusive=percent_notAbusive)
+                percent_abusive=round(percent_abusive, 4),
+                percent_notAbusive=round(percent_notAbusive, 4))
 
         # Option 2: user chooses a randomly selected text
 
@@ -92,8 +92,8 @@ def main():
             return flask.render_template('index.html', 
                 random_text=random_text,
                 result=prediction,
-                percent_abusive=percent_abusive,
-                percent_notAbusive=percent_notAbusive)
+                percent_abusive=round(percent_abusive, 4),
+                percent_notAbusive=round(percent_notAbusive, 4))
 
         # Option 3: Generate dropdown menu
         elif flask.request.form.get('mixed'):
@@ -161,8 +161,8 @@ def main():
 
             return flask.render_template('index.html',
                 result=prediction,
-                percent_abusive=percent_abusive,
-                percent_notAbusive=percent_notAbusive,
+                percent_abusive=round(percent_abusive, 4),
+                percent_notAbusive=round(percent_notAbusive, 4),
                 selected_text=selected_text,
                 dropdownMenu=dropdownMenu)
 
@@ -239,9 +239,6 @@ def classify_image():
             return flask.render_template('classify_image.html', prediction=str(prediction))
 
     return(flask.render_template('classify_image.html'))
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
